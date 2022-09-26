@@ -1,5 +1,5 @@
 import pandas as pd
-from random import randrange, sample
+from random import sample
 
 
 def main(n):
@@ -11,7 +11,6 @@ def main(n):
 
     for i, number in enumerate(questions):
  
-        # number = randrange(len(data)) #Choisis une des question au hasard
         print("\nQuestion {}".format(i+1)," sur {}:".format(n))
         print("____________________________")
         print(data["Question"][number]) #Affiche la question
