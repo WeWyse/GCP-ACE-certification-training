@@ -2,12 +2,12 @@
 Script Python pour les Quizz d'entrainement à la certification Associate Cloud Engineer de GCP
 
 ## Installer les librairies nécessaires
-`pip install pandas random2`
+`pip install streamlit`
 
 ## Fonctionnement 
-* Lancer le script Evalution_test.py `python Evalution_test.py`
+* Lancer le serveur: Dans le dossier principal: python3 -m streamlit run main.py ou streamlit run main.py
 * Entrer le nombre de question que l'on souhaite avoir dans une série.
-* Entrer la réponse à la question en lettre majuscule (A,B,C,D,E)
-* Relancer le cript pour une nouvelle série.
-
+* Selectionner les questions et appuyer sur Submit
+* Control-C dans le terminal pour arreter le serveur
+* Relancer le serveur pour avoir une nouvelle série de questions différentes
 
