@@ -23,9 +23,8 @@ questions = get_sample_question(data, n)
 
 submitted_answers = []
 explanations = []
-i = 0
 
-for question in questions:
+for i, question in enumerate(questions):
 
     # writing the question
     st.write(data["Question"][question], key=i)
@@ -37,23 +36,23 @@ for question in questions:
     submitted_answers.append(dico[answer])
     explanation = st.empty()
     explanations.append(explanation)
-    i += 1
     st.write("-----------------------------------")
 
 submitted = st.button(label="Submit answers")
 
+
 if submitted:
     score = 0
     for i, answer in enumerate(submitted_answers):
-        if data["result"][i] == answer:
+        if data["result"][questions[i]] == answer:
             score += 1
             with explanations[i].container():
                 st.write("Correct !")
-                st.write(data['explanation'][i])
+                st.write(data["explanation"][questions[i]])
         else:
             with explanations[i].container():
                 st.write("Wrong !")
-                st.write("The correct answer was ", data["result"][i])
-                st.write(data['explanation'][i])
+                st.write("The correct answer was ", data["result"][questions[i]])
+                st.write(data["explanation"][questions[i]])
     st.write("Final score : ", score, " / ", n)
     st.write("Accuracy percentage : ", round(score / n, 3), "%")
