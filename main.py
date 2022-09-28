@@ -26,6 +26,8 @@ explanations = []
 
 for i, question in enumerate(questions):
 
+    st.write("Question ", i + 1, " / ", n)
+
     # writing the question
     st.write(data["Question"][question], key=i)
 
