@@ -5,7 +5,7 @@ from random import sample
 
 @st.cache()
 def get_sample_question(data, nb_of_questions):
-    return sample(range(1, len(data) + 1), nb_of_questions)
+    return sample(range(1, len(data)), nb_of_questions)
 
 
 # raw data
@@ -57,4 +57,4 @@ if submitted:
                 st.write("The correct answer was ", data["result"][questions[i]])
                 st.write(data["explanation"][questions[i]])
     st.write("Final score : ", score, " / ", n)
-    st.write("Accuracy percentage : ", round(score / n, 3), "%")
+    st.write("Accuracy percentage : ", round((score / n)*100, 3), " %")
