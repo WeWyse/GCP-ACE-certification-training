@@ -8,7 +8,6 @@ def get_sample_question(data, nb_of_questions):
     return sample(range(1, len(data)), nb_of_questions)
 
 
-# raw data
 st.title("WELCOME TO WEWYSE GCP ACE TRAINING !")
 
 # get raw data
@@ -26,6 +25,7 @@ explanations = []
 
 for i, question in enumerate(questions):
 
+    # question number
     st.write("Question ", i + 1, " / ", n)
 
     # writing the question
