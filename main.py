@@ -1,12 +1,12 @@
+from functools import cache
 import streamlit as st
 import pandas as pd
-from random import sample
+from random import sample, randint
 
 
 @st.cache()
-def get_sample_question(data, nb_of_questions):
+def get_sample_question(data, nb_of_questions, random_number=None):
     return sample(range(1, len(data)), nb_of_questions)
-
 
 st.title("WELCOME TO WEWYSE GCP ACE TRAINING !")
 
@@ -17,11 +17,18 @@ data = pd.read_csv("Evaluation_test.csv", sep=";")
 n = st.number_input('How many questions do you want ?', step=1, min_value=1, max_value=len(data))
 st.write('You asked for ', n, ' questions.')
 
+
 # get n questions
 questions = get_sample_question(data, n)
 
 submitted_answers = []
 explanations = []
+
+# button to restart test
+if st.sidebar.button("Restart test ? "): 
+    questions = get_sample_question(data, n, randint(0, 100000))
+
+
 
 for i, question in enumerate(questions):
 
@@ -35,7 +42,8 @@ for i, question in enumerate(questions):
     dico = {str(x) + " : " + str(data[x][question]): x for x in ['A', 'B', 'C', 'D', 'E'] if str(data[x][question]) != "nan"}
     options = [str(x) + " : " + str(data[x][question]) for x in ['A', 'B', 'C', 'D', 'E'] if str(data[x][question]) != "nan"]
     answer = st.radio('What is your answer ? ', options)
-    submitted_answers.append(dico[answer])
+    if answer is not None:
+        submitted_answers.append(dico[answer])
     explanation = st.empty()
     explanations.append(explanation)
     st.write("-----------------------------------")
@@ -56,5 +64,5 @@ if submitted:
                 st.write("Wrong !")
                 st.write("The correct answer was ", data["result"][questions[i]])
                 st.write(data["explanation"][questions[i]])
-    st.write("Final score : ", score, " / ", n)
-    st.write("Accuracy percentage : ", round((score / n)*100, 3), " %")
+    st.sidebar.write("Final score : ", score, " / ", n)
+    st.sidebar.write("Accuracy percentage : ", round((score / n)*100, 3), " %")
